@@ -25,6 +25,16 @@ router.post("/", (req, res) => {
 	});
 });
 
+router.post("/login", (req, res) => {
+	// TODO: add user login function here and redirect use to a handlebars page using res.render
+
+	res.status(200).json({
+		method: req.method,
+		endpoint: `/api/users/login`,
+		...req.body,
+	});
+});
+
 // PUT /api/users/:id
 router.put("/:id", (req, res) => {
 	// TODO: add update user function here
