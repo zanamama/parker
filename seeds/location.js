@@ -16,7 +16,7 @@ const location = [
   },
 
   {
-    address: '7212 St Louis Street West Babylon, NY 11704',
+    address: '7218 St Louis Street West Babylon, NY 11704',
     isOpen: 'False'
   },  
 ];
