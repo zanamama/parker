@@ -7,7 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Static folder setup
-app.use(express.static(__dirname + "/public"));
+// TODO: Remeber to uncomment the express.static line below
+// app.use(express.static(__dirname + "/public"));
+
+// URL-encoded & JSON bodies setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Handlebars setup
 app.engine("handlebars", exphbs());
