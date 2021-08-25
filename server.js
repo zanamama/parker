@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// generic fxn
+// generic fxn!
 app.get("/", (req, res) => {
   res.json("Welcome to Parker App!");
 });
