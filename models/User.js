@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require("'bcrypt");
+const bcrypt = require("bcrypt");
 
 const sequelize = require('../config/connection.js');
 
@@ -22,10 +22,6 @@ User.init(
       allowNull: false,
     },
     last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -52,7 +48,7 @@ User.init(
         return newUserData
       },
     },
-    sequlize,
+    sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
