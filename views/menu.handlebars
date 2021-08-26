@@ -30,10 +30,17 @@
 			href="/developers"
 			class="btn btn-outline-secondary form-control btn-lg my-2"
 		>Developers</a>
+		{{#if true}}
+		<a
+			href="/login"
+			class="btn btn-success form-control btn-lg my-2"
+		>Login</a>
+		{{else}}
 		<button
 			href="/"
 			class="btn btn-danger form-control btn-lg my-2"
 		>Logout</button>
+		{{/if}}
 	</div>
 </div>
 <!-- Menu page ends here -->
