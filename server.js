@@ -15,14 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Static folder setup
-// TODO: Remeber to uncomment the express.static line below
 app.use(express.static(path.join(__dirname, "public")));
 
 // Handlebars setup
+// TODO: const hbs = exphbs.create({ helpers });
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
-
-// TODO: const hbs = exphbs.create({ helpers });
 
 // Routes setup
 app.use(routes);
