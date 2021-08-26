@@ -36,12 +36,32 @@
 	<body>
 		<div class="container-fluid">
 			<div class="mock-phone-header"></div>
-			{{! xs sm md lg xl }}
-			<div
-				class="col-12 col-sm-8 col-md-6 col-lg-4 offset-0 offset-sm-2 offset-md-3 offset-lg-4 mock-phone">
-				{{! Every other pages renders here! }}
-				{{{body}}}
-				{{! Every other pages renders here! }}
+
+			{{! The main handlebar starts here! }}
+			<div class="row">
+				<div
+					class="col-12 col-sm-8 col-md-6 col-lg-4 offset-0 offset-sm-2 offset-md-3 offset-lg-4 mock-phone"
+				>
+					<!-- Parker Logo -->
+					<nav class="row mb-3 bg-dark rounded-top text-light py-3">
+						<div class="col-8">
+							<span class="navbar-brand mb-0 h1">
+								<i class="fas fa-car"></i>
+								Parker App
+							</span>
+						</div>
+						<div class="col-4 text-right">
+							<i class="fas fa-bars fa-2x"></i>
+						</div>
+					</nav>
+
+					{{! Other handlebar files renders here }}
+					<div class="row">
+						<div class="col-12 p-3">
+							{{{body}}}
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="mock-phone-footer"></div>
 		</div>
