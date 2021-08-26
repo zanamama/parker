@@ -19,6 +19,10 @@ body {
 	min-height: 15vh;
 }
 
+.bg-black {
+	background-color: #000000;
+}
+
 @media screen and (max-width: 577px) {
 	.mock-phone-header {
 		min-height: 5vh;
