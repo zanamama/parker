@@ -2,7 +2,11 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Location extends Model {}
+class Location extends Model {
+	hasOpenSpace() {
+		return this.numOpenSpace > 0;
+	}
+}
 
 Location.init(
 	{
@@ -11,10 +15,10 @@ Location.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		isOpen: {
-			type: DataTypes.BOOLEAN,
+		numOpenSpace: {
+			type: DataTypes.INTEGER,
 			allowNull: false,
-			defaultValue: true,
+			defaultValue: 0,
 		},
 	},
 	{
