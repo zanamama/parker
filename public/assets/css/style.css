@@ -9,7 +9,6 @@ body {
 	min-height: 70vh;
 	background-color: #ffffff;
 	border-radius: 10px;
-	overflow: scroll;
 }
 
 .mock-phone-header {
@@ -18,6 +17,10 @@ body {
 
 .mock-phone-footer {
 	min-height: 15vh;
+}
+
+.bg-black {
+	background-color: #000000;
 }
 
 @media screen and (max-width: 577px) {
