@@ -1,35 +1,47 @@
 const express = require("express");
-const session = require('express-session');
+const exphbs = require("express-handlebars");
+const sequelize = require("./config/connection");
+const routes = require("./controllers");
+const session = require("express-session");
+const sequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 // Static folder setup
-app.use(express.static(__dirname + "/public"));
+// TODO: Remeber to uncomment the express.static line below
+// app.use(express.static(__dirname + "/public"));
 
-// TODO: session setup
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// URL-encoded & JSON bodies setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Handlebars setup
+app.engine("handlebars", exphbs());
+app.set("view engine", "handlebars");
+
+// Routes setup
+app.use(routes);
+
+// Session setup
 const sess = {
-  secret: 'Super secret secret',
-  cookie: {},
-  resave: false,
-  saveUnitialized: true,
-  store: new SequelizeStorelizeStore({
-    db: sequelize
-  })
+	secret: "Super secret secret",
+	cookie: {},
+	resave: false,
+	saveUnitialized: true,
+	store: new sequelizeStore({
+		db: sequelize,
+	}),
 };
-
 app.use(session(sess));
 
-// generic fxn
-app.get("/", (req, res) => {
-	res.json("Welcome to Parker App!");
-});
-
-app.listen(PORT, (err) => {
-	if (err) {
-		console.log("Whoops, an error occured.", err);
-	} else {
-		console.log(`Got it! Listening on PORT ${PORT}`);
-	}
+// Sequelize setup
+sequelize.sync({ force: false }).then(() => {
+	app.listen(PORT, (err) => {
+		if (err) {
+			console.log("Whoops, an error occured.", err);
+		} else {
+			console.log(`Got it! Listening on PORT ${PORT}`);
+		}
+	});
 });
