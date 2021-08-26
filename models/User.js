@@ -17,14 +17,10 @@ User.init(
 			primaryKey: true,
 			autoIncrement: true,
 		},
-		// TODO: Change first_name to firstname
 		firstname: {
-			// 1. TODO: Change types to type
-			// 2. TODO: Change DataTypes.String to DataTypes.STRING
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		// TODO: Change last_name to lastname
 		lastname: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -51,7 +47,6 @@ User.init(
 	},
 	{
 		hooks: {
-			// TODO: Correct beforeCaete to beforeCreate
 			beforeCreate: async (newUserData) => {
 				newUserData.password = await bcrypt.has(newUserData.password, 10);
 				return newUserData;

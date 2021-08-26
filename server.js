@@ -2,6 +2,8 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const sequelize = require("./config/connection");
 const routes = require("./controllers");
+const session = require("express-session");
+const sequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -20,6 +22,18 @@ app.set("view engine", "handlebars");
 
 // Routes setup
 app.use(routes);
+
+// Session setup
+const sess = {
+	secret: "Super secret secret",
+	cookie: {},
+	resave: false,
+	saveUnitialized: true,
+	store: new sequelizeStore({
+		db: sequelize,
+	}),
+};
+app.use(session(sess));
 
 // Sequelize setup
 sequelize.sync({ force: false }).then(() => {

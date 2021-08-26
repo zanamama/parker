@@ -1,11 +1,11 @@
 const sequelize = require('../config/connection');
-const users = require('./users');
-const location = require('./location');
+const user = require('./userSeed');
+const location = require('./locationSeed');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
 
-  await users();
+  await user();
 
   await location();
 

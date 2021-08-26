@@ -1,7 +1,5 @@
-// TODO: Replace Users with User
 const { User } = require("../models");
 
-// TODO: Change lastName to lastname
 const users = [
 	{
 		firstname: "Hassan",
@@ -33,7 +31,6 @@ const users = [
 	},
 ];
 
-// TODO: Replace Users with User
 const userData = () => User.bulkCreate(users);
 
 module.exports = userData;
