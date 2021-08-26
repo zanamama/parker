@@ -4,6 +4,7 @@
         <button type="button" class="btn btn-danger form-control btn-lg">Report Parking Spot</button>
       </div>
     </div>
+    {{#if false}}
     <div class="row">
       <div class="col-12">
         <ul class="list-group">
@@ -13,5 +14,14 @@
           <li class="list-group-item"><i class="fas fa-map-marker-alt text-danger"></i> 7218 St Louis Street West Babylon, NY 11704</li>
         </ul>
       </div>
-    </div>
+    </div>  
+    {{else}}
+     <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+           <img src="/assets/images/map.png" alt="" class="img-fluid rounded-lg border border-dark">
+        </div>
+      </div>
+    </div>  
+    {{/if}}  
   <!-- Homepage end here -->
