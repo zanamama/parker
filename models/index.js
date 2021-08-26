@@ -15,6 +15,14 @@ Car.belongsTo(User, {
 });
 
 // TODO: Car have one location (at any given time)
+Location.hasMany(Car, {
+  foreignKey: 'location_id',
+  onDelete: 'CASCADE'
+});
+
+Car.belongsTo(Location, {
+  foreignKey: 'location_id',
+})
 
 // TODO: Location have many cars
 
