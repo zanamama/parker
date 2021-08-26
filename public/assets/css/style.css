@@ -9,7 +9,6 @@ body {
 	min-height: 70vh;
 	background-color: #ffffff;
 	border-radius: 10px;
-	overflow: scroll;
 }
 
 .mock-phone-header {
