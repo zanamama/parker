@@ -5,7 +5,7 @@ const sequelize = require("./config/connection");
 const routes = require("./controllers");
 const path = require("path");
 const session = require("express-session");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+// const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,18 +17,12 @@ app.use(express.urlencoded({ extended: true }));
 // Static folder setup
 // TODO: Remeber to uncomment the express.static line below
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(express.static(path.join(__dirname, "public")));
 
 // Handlebars setup
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
-// // TODO: const hbs = exphbs.create({ helpers });
-
-// const exphbs = require("express-handlebars");
-// const hbs = exphbs.create({});
-// app.engine("handlebars", hbs.engine);
-// app.set("view engine", "handlebars");
+// TODO: const hbs = exphbs.create({ helpers });
 
 // Routes setup
 app.use(routes);
@@ -38,10 +32,10 @@ const sess = {
 	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: true,
-	store: new SequelizeStore({
-		db: sequelize,
-	}),
-	cookie: {},
+	// store: new SequelizeStore({
+	// 	db: sequelize,
+	// }),
+	// cookie: {},
 };
 app.use(session(sess));
 
