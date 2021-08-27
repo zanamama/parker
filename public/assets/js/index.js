@@ -38,15 +38,21 @@ function geoFindMe() {
 	// Credits to https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#examples
 }
 
-async function locationApiCall(locationObj) {
-	const response = await fetch(locationApiUrl, {
+function locationApiCall(locationObj) {
+	fetch(locationApiUrl, {
 		method: "POST", // or 'PUT'
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(locationObj),
-	}).then((response) => response.json());
-	console.log("Respose One: ", response);
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			if (data && !data.error) {
+				// reload the page to fetch the added parking spot
+				location.reload();
+			}
+		});
 }
 
 // INTERACTIONS =====================
