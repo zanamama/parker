@@ -11,12 +11,6 @@ class User extends Model {
 
 User.init(
 	{
-		id: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
-		},
 		firstname: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -50,7 +44,7 @@ User.init(
 			beforeUpdate: async (updatedUser) => {
 				updatedUser.password = await bcrypt.hash(updatedUser.password, 10);
 				return updatedUser;
-			}
+			},
 		},
 		sequelize,
 		timestamps: false,

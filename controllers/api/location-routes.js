@@ -29,15 +29,15 @@ router.post("/", (req, res) => {
 			if (positionstackResponse) {
 				let locationData = positionstackResponse.data.data[0]; // The first index
 
-				// // TODO: Store the response data formatted_address, latitude and longitude in our locations table
-				// const parkingSpot = {
-				// 	latitude: locationData.latitude,
-				// 	longitude: locationData.longitude,
-				// 	address: locationData.label,
-				// 	userId:
-				// 		req.session && req.session.user ? req.session.user.id : Date.now(),
-				// };
-				// Location.create(parkingSpot);
+				// TODO: Store the response data formatted_address, latitude and longitude in our locations table
+				const parkingSpot = {
+					latitude: locationData.latitude,
+					longitude: locationData.longitude,
+					address: locationData.label,
+					userId:
+						req.session && req.session.user ? req.session.user.id : Date.now(),
+				};
+				Location.create(parkingSpot);
 
 				// TODO: Send back json response to conditionally refresh the homepage to fetch the newly added location
 				res.status(200).json({

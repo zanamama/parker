@@ -1,6 +1,8 @@
 // DEPENDENCIES =====================
 const status = document.querySelector("#status");
 const mapLink = document.querySelector("#map-link");
+// // TODO: Make sure the locationApiUrl is dynamic to work on live deployment
+// const locationApiUrl = `https://parker-live.herokuapp.com/api/locations`;
 const locationApiUrl = `http://localhost:4000/api/locations`;
 
 // FUNCTIONS =====================

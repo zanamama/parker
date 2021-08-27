@@ -6,23 +6,23 @@ const Location = require("./Location");
 
 // TODO: User have one car (lets change to many cars)
 User.hasOne(Car, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE',
+	foreignKey: "user_id",
+	onDelete: "CASCADE",
 });
 
 Car.belongsTo(User, {
-  foreignKey: 'user_id',
+	foreignKey: "user_id",
 });
 
 // TODO: Car have one location (at any given time)
 Location.hasMany(Car, {
-  foreignKey: 'location_id',
-  onDelete: 'CASCADE'
+	foreignKey: "location_id",
+	onDelete: "CASCADE",
 });
 
 Car.belongsTo(Location, {
-  foreignKey: 'location_id',
-})
+	foreignKey: "location_id",
+});
 
 // TODO: Location have many cars
 
