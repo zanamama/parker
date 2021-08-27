@@ -1,16 +1,25 @@
 const router = require("express").Router();
 const axios = require("axios");
-const { Location } = require("../../models");
+const { Location, User, Car } = require("../../models");
 
 // GET /api/locations
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
 	// TODO: add function to display all locations here and include all foreign properties
-	res.status(200).json({ method: req.method, endpoint: "/api/locations" });
+	let showSpots = false;
+	const locations = await Location.findAll();
+	const locationsData = locations.map((spot) => spot.get({ plain: true }));
+	if (locationsData.length) showSpots = true;
+	res
+		.status(200)
+		.json({ method: req.method, endpoint: "/api/locations", ...locationsData });
 });
 
 // GET /api/locations/:id
 router.get("/:id", (req, res) => {
 	// TODO: add function to fetch individual locations here using id
+	// const locations = await Location.findAll({
+	// 	include: [{ model: Car }],
+	// });
 	res
 		.status(200)
 		.json({ method: req.method, endpoint: `/api/locations/${req.params.id}` });

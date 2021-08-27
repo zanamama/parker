@@ -1,25 +1,45 @@
-<div class="row">
-	<div class="col-12 text-center"><h2>212 crestwood drive Valley stream, NY 11278</h2></div>
-</div>
-
-<div class="row my-5">
-	<div class="offset-2 col-8">
-		{{#if true}}
-		<button type="button" class="btn btn-success form-control btn-lg">I Parked Here</button>
-		{{else}}
-		<button type="button" class="btn btn-info form-control btn-lg">Go Now!</button>
-		{{/if}}
+{{#if showParkedCars}}
+	<div class="row">
+		<div class="col-12 text-center"><h3>{{locationData.address}}</h3></div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-12">
-		<ul class="list-group">
-		<li class="list-group-item"><i class="fas fa-car-side text-danger fa-lg mr-2"></i> <span class="text-muted mr-2">1 of 5</span> <span class="h4">Toyota Camry</span> </li>
-		<li class="list-group-item"><i class="fas fa-car-side text-danger fa-lg mr-2"></i> <span class="text-muted mr-2">2 of 5</span> <span class="h4">Mazda Cx5</span></li>
-		<li class="list-group-item"><i class="fas fa-car-side text-danger fa-lg mr-2"></i> <span class="text-muted mr-2">3 of 5</span> <span class="h4">Toyota Camry</span></li>
-		<li class="list-group-item"><i class="fas fa-car-side text-danger fa-lg mr-2"></i> <span class="text-muted mr-2">4 of 5</span> <span class="h4">Mazda Cx5</span></li>
-		<li class="list-group-item"><i class="fas fa-car-side text-success fa-lg mr-2"></i> <span class="text-muted mr-2">5 of 5</span> <span class="h4">Currently Empty!</span></li>
-	</ul>
+	<div class="row my-5">
+		<div class="offset-2 col-8">
+			<a
+				href="https://www.google.com/maps/search/?api=1&query={{locationData.latitude}},{{locationData.longitude}}"
+				target="_blank"
+				class="btn btn-success form-control btn-lg my-1"
+			>Go Now!</a>
+
+			<button type="button" class="btn btn-secondary form-control btn-lg my-1">
+				I Parked Here
+			</button>
+		</div>
 	</div>
-</div>
+
+	<div class="row">
+		<div class="col-12">
+			{{#if locationData.cars}}
+				<ul class="list-group">
+					{{#each locationData.cars as |car|}}
+						<li class="list-group-item"><i
+								class="fas fa-car-side text-danger fa-lg mr-2"
+							></i>
+							<span class="text-muted mr-2">{{@index}}
+								of 5</span>
+							<span class="h4">{{car.brand}} {{car.model}}</span>
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<div class="my-5 text-danger text-center">
+					<h3>Oops! There's no car here!</h3>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+{{else}}
+	<div class="my-5 text-danger text-center">
+		<h3>Oops! There's nothing here!</h3>
+	</div>
+{{/if}}
