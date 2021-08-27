@@ -11,6 +11,14 @@ class Location extends Model {
 Location.init(
 	{
 		// TODO: Change adress to address
+		latitude: {
+			type: DataTypes.DOUBLE,
+			allowNull: false,
+		},
+		longitude: {
+			type: DataTypes.DOUBLE,
+			allowNull: false,
+		},
 		address: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -18,7 +26,14 @@ Location.init(
 		numOpenSpace: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			defaultValue: 0,
+			defaultValue: 5,
+		},
+		user_id: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: "user",
+				key: "id",
+			},
 		},
 	},
 	{

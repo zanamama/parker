@@ -7,11 +7,11 @@ const location = require("./locationSeeds");
 const seedAll = async () => {
 	await sequelize.sync({ force: true });
 
-	await car();
-
 	await user();
 
 	await location();
+
+	await car();
 
 	process.exit(0);
 };
