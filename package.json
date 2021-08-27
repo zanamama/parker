@@ -4,6 +4,7 @@
 	"description": "Projects play a key role in our journey to becoming a full-stack web developer. As we enter the last phase of the boot camp, you’ll begin to apply for development jobs. If you want to land interviews, your portfolio must feature high-quality deployed examples of your work—-and you can use your finished projects for that very purpose.",
 	"main": "server.js",
 	"dependencies": {
+		"axios": "^0.21.1",
 		"bcrypt": "^5.0.1",
 		"connect-session-sequelize": "^7.1.1",
 		"dotenv": "^10.0.0",
