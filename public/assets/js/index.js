@@ -1,6 +1,7 @@
 // DEPENDENCIES =====================
 const status = document.querySelector("#status");
 const mapLink = document.querySelector("#map-link");
+const locationApiUrl = `http://localhost:4000/api/locations`;
 
 // FUNCTIONS =====================
 function geoFindMe() {
@@ -12,6 +13,11 @@ function geoFindMe() {
 		const longitude = position.coords.longitude;
 
 		// TODO: make api call containing the lat & lng using fetch to POST: /api/locations
+		const positionObj = {
+			latitude,
+			longitude,
+		};
+		locationApiCall(positionObj);
 
 		status.textContent = "";
 		mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
@@ -32,8 +38,15 @@ function geoFindMe() {
 	// Credits to https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#examples
 }
 
-function locationApiCall() {
-	fetch();
+async function locationApiCall(locationObj) {
+	const response = await fetch(locationApiUrl, {
+		method: "POST", // or 'PUT'
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(locationObj),
+	}).then((response) => response.json());
+	console.log("Respose One: ", response);
 }
 
 // INTERACTIONS =====================

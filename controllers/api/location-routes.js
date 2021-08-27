@@ -31,6 +31,7 @@ router.post("/", (req, res) => {
 			city: "Manhattan",
 			street: "234 54th Street, Manhattan, New York, 10001",
 			zipCode: 10001,
+			url: positionUrl,
 		},
 	});
 });
