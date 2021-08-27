@@ -13,26 +13,20 @@
 		</div>
 	</div>
 </div>
-{{#if false}}
+{{#if showSpots}}
 	<div class="row">
 		<div class="col-12">
 			<ul class="list-group">
-				<li class="list-group-item"><i
-						class="fas fa-map-marker-alt text-danger"
-					></i>
-					212 crestwood drive Valley stream, NY 11278</li>
-				<li class="list-group-item"><i
-						class="fas fa-map-marker-alt text-danger"
-					></i>
-					119 Golf Street Freeport, NY 11520</li>
-				<li class="list-group-item"><i
-						class="fas fa-map-marker-alt text-danger"
-					></i>
-					8424 N. Paris Hill Ave. Bridgewater, NJ 08807</li>
-				<li class="list-group-item"><i
-						class="fas fa-map-marker-alt text-danger"
-					></i>
-					7218 St Louis Street West Babylon, NY 11704</li>
+				{{#each locationsData as |location|}}
+					<li class="list-group-item"><i
+							class="fas fa-map-marker-alt fa-lg text-danger mr-2"
+						></i>
+						<a
+							href="/parking/{{location.id}}"
+							class="text-dark font-weight-bold"
+						>{{location.address}}</a>
+					</li>
+				{{/each}}
 			</ul>
 		</div>
 	</div>
