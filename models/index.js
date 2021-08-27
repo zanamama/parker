@@ -26,4 +26,13 @@ Car.belongsTo(Location, {
 
 // TODO: Location have many cars
 
+// TODO: User has many locations & location belongs to one user
+User.hasMany(Location, {
+	foreignKey: "user_id",
+});
+
+Location.belongsTo(User, {
+	foreignKey: "user_id",
+});
+
 module.exports = { Car, User, Location };

@@ -34,8 +34,7 @@ router.post("/", (req, res) => {
 					latitude: locationData.latitude,
 					longitude: locationData.longitude,
 					address: locationData.label,
-					userId:
-						req.session && req.session.user ? req.session.user.id : Date.now(),
+					user_id: 3, // TODO: change this to be dynamic user id from session
 				};
 				Location.create(parkingSpot);
 

@@ -38,7 +38,7 @@ const sess = {
 app.use(session(sess));
 
 // Sequelize setup
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
 	app.listen(PORT, (err) => {
 		if (err) {
 			console.log("Whoops, an error occured.", err);
