@@ -20,7 +20,7 @@ Car.init(
 		},
 		user_id: {
 			type: DataTypes.INTEGER,
-			refernece: {
+			references: {
 				model: "user",
 				key: "id",
 			},
@@ -28,8 +28,8 @@ Car.init(
 		location_id: {
 			type: DataTypes.INTEGER,
 			references: {
-				model: 'location',
-				key: 'id',
+				model: "location",
+				key: "id",
 			},
 		},
 	},
@@ -39,7 +39,7 @@ Car.init(
 		freezeTableName: true,
 		underscored: true,
 		// TODO: Change product to car
-		modelname: "car",
+		modelName: "car",
 	}
 );
 
