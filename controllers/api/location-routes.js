@@ -17,6 +17,9 @@ router.get("/:id", (req, res) => {
 // POST /api/locations
 router.post("/", (req, res) => {
 	// TODO: add create location function here
+	const lat = req.body.lat;
+	const lng = req.body.lng;
+	const positionUrl = `http://api.positionstack.com/v1/reverse?access_key=${process.env.POSITION_API_KEY}&query=${lat},${lng}`;
 
 	res.status(200).json({
 		method: req.method,
