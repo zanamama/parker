@@ -27,7 +27,7 @@ document.querySelector(".register-form").addEventListener('submit', async (event
 		}
 	} else {
     message.innerText = "Invalid Inputs! Try again";
-    message.style.color = "green";
+    message.style.color = "red";
     setTimeout(function(){
       message.style.color = "black";
       message.innerText = 'Must be 8+ Characters in Length';

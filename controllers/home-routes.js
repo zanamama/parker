@@ -41,16 +41,14 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
 	try {
-
 		const userData = await User.create(req.body);
-
+		console.log(req.session)
 		req.session.save(() => {
 			req.session.user_id = userData.id;
 			req.session.loggedIn = true;
 
-			// res.status(200).json(userData);
+			res.status(200).json(userData);
 		});
-		req.status(200).json(userData);
 	} catch(err) {
 		res.status(400).json(err);
 	}
@@ -79,15 +77,10 @@ router.get('/addCar', (req, res) => {
 router.post("/addCar", async (req, res) => {
 	try {
 		req.body.user_id = req.session.user_id
+		console.log(req.body);
 
 		const userData = await Car.create(req.body);
 
-		req.session.save(() => {
-			req.session.user_id = userData.id;
-			req.session.loggedIn = true;
-
-			// res.status(200).json(userData);
-		});
 		req.status(200).json(userData);
 	} catch(err) {
 		res.status(400).json(err);
