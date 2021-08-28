@@ -1,12 +1,20 @@
 <!-- Homepage starts here -->
 <div class="row my-5">
 	<div class="offset-2 col-8">
+		{{#if logged_in}}
 		<button
 			type="button"
 			class="btn btn-danger form-control btn-lg"
 			id="find-me"
 		>Report Parking Spot
 		</button>
+		{{else}}
+		<a
+			href="/login"
+			class="btn btn-danger form-control btn-lg"
+		>Report Parking Spot
+		</a>
+		{{/if}}
 		<div class="text-center mt-2">
 			<p id="status"></p>
 			<a id="map-link" target="_blank"></a>

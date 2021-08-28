@@ -45,7 +45,7 @@ router.post("/register", async (req, res) => {
 		console.log(req.session)
 		req.session.save(() => {
 			req.session.user_id = userData.id;
-			req.session.loggedIn = true;
+			req.session.logged_in = true;
 
 			res.status(200).json(userData);
 		});
@@ -53,6 +53,16 @@ router.post("/register", async (req, res) => {
 		res.status(400).json(err);
 	}
 });
+
+router.post('/logout', (req, res) => {
+	if (req.session.logged_in) {
+		req.session.destroy(() => {
+			res.status(200).end();
+		});
+	} else {
+		res.status(404).end();
+	}
+})
 
 router.get("/profile", (req, res) => {
 	res.render("profile");
@@ -77,7 +87,7 @@ router.get('/addCar', (req, res) => {
 router.post("/addCar", async (req, res) => {
 	try {
 		req.body.user_id = req.session.user_id
-		console.log(req.body);
+		console.log(req.session.user_id);
 
 		const userData = await Car.create(req.body);
 

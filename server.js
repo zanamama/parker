@@ -11,6 +11,21 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Session setup
+const sess = {
+  secret: process.env.SESSION_SECRET,
+	cookie: { 
+	 	maxAge: 24 * 60 * 60 * 1000
+	},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
+
 // URL-encoded & JSON bodies setup
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,24 +39,6 @@ app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 // Routes setup
-
-
-// Session setup
-const sess = {
-  secret: process.env.SESSION_SECRET,
-	cookie: { 
-		path: '/',
-		httpOnly: false,
-	 	maxAge: 24*60*60*1000
-	},
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize
-  })
-};
-
-app.use(session(sess));
 app.use(routes);
 
 // Sequelize setup
