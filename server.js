@@ -24,12 +24,16 @@ app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
 // Routes setup
-app.use(routes);
+
 
 // Session setup
 const sess = {
   secret: process.env.SESSION_SECRET,
-	cookie: { secure: !true },
+	cookie: { 
+		path: '/',
+		httpOnly: false,
+	 	maxAge: 24*60*60*1000
+	},
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -38,6 +42,7 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(routes);
 
 // Sequelize setup
 sequelize.sync({ force: false }).then(() => {

@@ -51,7 +51,7 @@ document.querySelector(".car-form").addEventListener("submit", async (event) => 
 			headers: { "Content-Type": "application/json" },
 		});
 		if (response.ok) {
-			document.location.replace('/home');
+			document.location.replace('/');
 		} else {
 			message.innerText = "Invalid Inputs! Try again";
 			message.style.color = "red";
