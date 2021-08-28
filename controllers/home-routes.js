@@ -8,7 +8,8 @@ router.get("/", async (req, res) => {
 	const locations = await Location.findAll();
 	const locationsData = locations.map((spot) => spot.get({ plain: true }));
 	if (locationsData.length) showSpots = true;
-	res.render("home", { showSpots, locationsData });
+	console.log(req.session.user_id)
+	res.render("home", { showSpots, locationsData, logged_in: req.session.logged_in });
 });
 
 // Show parked cars in a specific locations using the location id
@@ -24,7 +25,7 @@ router.get("/parking/:id", async (req, res) => {
 
 // Work around to show navigation page
 router.get("/menu", (req, res) => {
-	res.render("menu");
+	res.render("menu", {logged_in: req.session.logged_in});
 });
 
 /* TODO: Guys you can work here instead of the /api folder, 
@@ -35,6 +36,15 @@ router.get("/login", (req, res) => {
 	res.render("login");
 });
 
+router.post("/login", (req, res) => {
+	try {
+		console.log(req.session.logged_in);
+		res.status(200).json({ message: "hello" })
+	} catch(err) {
+
+	}
+});
+
 router.get("/register", (req, res) => {
 	res.render("register");
 });
@@ -42,7 +52,7 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
 	try {
 		const userData = await User.create(req.body);
-		console.log(req.session)
+
 		req.session.save(() => {
 			req.session.user_id = userData.id;
 			req.session.logged_in = true;
@@ -50,6 +60,7 @@ router.post("/register", async (req, res) => {
 			res.status(200).json(userData);
 		});
 	} catch(err) {
+		console.log("catch")
 		res.status(400).json(err);
 	}
 });

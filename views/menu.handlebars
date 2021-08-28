@@ -10,10 +10,13 @@
 			href="/"
 			class="btn btn-outline-secondary form-control btn-lg my-2"
 		>Home</a>
+		{{#if logged_in}}
 		<a
 			href="/profile"
 			class="btn btn-outline-secondary form-control btn-lg my-2"
 		>Profile</a>
+		{{else}}
+		{{/if}}
 		<a
 			href="/parking"
 			class="btn btn-outline-secondary form-control btn-lg my-2"
@@ -43,4 +46,5 @@
 		{{/if}}
 	</div>
 </div>
+<script type="text/javascript" src="/assets/js/logout.js"></script>
 <!-- Menu page ends here -->
