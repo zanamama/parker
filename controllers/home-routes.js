@@ -8,7 +8,8 @@ router.get("/", async (req, res) => {
 	const locations = await Location.findAll();
 	const locationsData = locations.map((spot) => spot.get({ plain: true }));
 	if (locationsData.length) showSpots = true;
-	res.render("home", { showSpots, locationsData });
+	console.log(req.session.user_id)
+	res.render("home", { showSpots, locationsData, logged_in: req.session.logged_in });
 });
 
 // Show parked cars in a specific locations using the location id
@@ -24,7 +25,7 @@ router.get("/parking/:id", async (req, res) => {
 
 // Work around to show navigation page
 router.get("/menu", (req, res) => {
-	res.render("menu");
+	res.render("menu", {logged_in: req.session.logged_in});
 });
 
 /* TODO: Guys you can work here instead of the /api folder, 
@@ -35,9 +36,44 @@ router.get("/login", (req, res) => {
 	res.render("login");
 });
 
+router.post("/login", (req, res) => {
+	try {
+		console.log(req.session.logged_in);
+		res.status(200).json({ message: "hello" })
+	} catch(err) {
+
+	}
+});
+
 router.get("/register", (req, res) => {
 	res.render("register");
 });
+
+router.post("/register", async (req, res) => {
+	try {
+		const userData = await User.create(req.body);
+
+		req.session.save(() => {
+			req.session.user_id = userData.id;
+			req.session.logged_in = true;
+
+			res.status(200).json(userData);
+		});
+	} catch(err) {
+		console.log("catch")
+		res.status(400).json(err);
+	}
+});
+
+router.post('/logout', (req, res) => {
+	if (req.session.logged_in) {
+		req.session.destroy(() => {
+			res.status(200).end();
+		});
+	} else {
+		res.status(404).end();
+	}
+})
 
 router.get("/profile", (req, res) => {
 	res.render("profile");
@@ -54,5 +90,22 @@ router.get("/privacy", (req, res) => {
 router.get("/developers", (req, res) => {
 	res.render("developers");
 });
+
+router.get('/addCar', (req, res) => {
+	res.render("addCar");
+})
+
+router.post("/addCar", async (req, res) => {
+	try {
+		req.body.user_id = req.session.user_id
+		console.log(req.session.user_id);
+
+		const userData = await Car.create(req.body);
+
+		req.status(200).json(userData);
+	} catch(err) {
+		res.status(400).json(err);
+	}
+})
 
 module.exports = router;
