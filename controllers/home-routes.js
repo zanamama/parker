@@ -40,15 +40,6 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// router.post("/login", (req, res) => {
-// 	try {
-// 		console.log(req.session.logged_in);
-// 		res.status(200).json({ message: "hello" })
-// 	} catch(err) {
-
-// 	}
-// });
-
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({

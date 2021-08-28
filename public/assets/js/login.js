@@ -1,7 +1,8 @@
 document
-  .querySelector("#login-form")
+  .querySelector(".login-form")
   .addEventListener("submit", async (event) => {
-    event.preventDefault;
+    event.preventDefault();
+    console.log("1")
 
     const email = document.getElementById("email").value.trim();
 
