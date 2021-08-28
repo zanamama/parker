@@ -39,6 +39,23 @@ router.get("/register", (req, res) => {
 	res.render("register");
 });
 
+router.post("/register", async (req, res) => {
+	try {
+
+		const userData = await User.create(req.body);
+
+		req.session.save(() => {
+			req.session.user_id = userData.id;
+			req.session.loggedIn = true;
+
+			// res.status(200).json(userData);
+		});
+		req.status(200).json(userData);
+	} catch(err) {
+		res.status(400).json(err);
+	}
+});
+
 router.get("/profile", (req, res) => {
 	res.render("profile");
 });
@@ -54,5 +71,27 @@ router.get("/privacy", (req, res) => {
 router.get("/developers", (req, res) => {
 	res.render("developers");
 });
+
+router.get('/addCar', (req, res) => {
+	res.render("addCar");
+})
+
+router.post("/addCar", async (req, res) => {
+	try {
+		req.body.user_id = req.session.user_id
+
+		const userData = await Car.create(req.body);
+
+		req.session.save(() => {
+			req.session.user_id = userData.id;
+			req.session.loggedIn = true;
+
+			// res.status(200).json(userData);
+		});
+		req.status(200).json(userData);
+	} catch(err) {
+		res.status(400).json(err);
+	}
+})
 
 module.exports = router;

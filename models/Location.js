@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const sequelize = require("../config/connection.js");
+const sequelize = require("../config/connection.js").default;
 
 class Location extends Model {
 	hasOpenSpace() {
