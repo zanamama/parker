@@ -1,6 +1,6 @@
 {{#if showParkedCars}}
 	<div class="row">
-		<div class="col-12 text-center"><h3>{{locationData.address}}</h3></div>
+		<div class="col-12 text-center" data-loc="{{locationData.id}}" id="location"><h3>{{locationData.address}}</h3></div>
 	</div>
 
 	<div class="row my-5">
@@ -11,7 +11,7 @@
 				class="btn btn-success form-control btn-lg my-1"
 			>Go Now!</a>
 
-			<button type="button" class="btn btn-secondary form-control btn-lg my-1">
+			<button type="button" id="park-here" class="btn btn-secondary form-control btn-lg my-1">
 				I Parked Here
 			</button>
 		</div>
@@ -43,3 +43,4 @@
 		<h3>Oops! There's nothing here!</h3>
 	</div>
 {{/if}}
+<script type="text/javascript" src="/assets/js/park.js"></script>

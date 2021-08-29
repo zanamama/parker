@@ -20,7 +20,7 @@ document
       if (response.ok) {
         document.location.replace("/");
       } else {
-        message.innerText = "Incorrect Email or Password";
+        message.innerText = "Please fill out all input fields";
         message.style.color = "red";
         setTimeout(() => {
           message.innerText = "Must be 8+ Characters in Length";

@@ -27,6 +27,23 @@ router.get("/parking/:id", async (req, res) => {
   res.render("parking", { showParkedCars, locationData });
 });
 
+router.put("parking/:id", async (req,res) => {
+  try{
+    const user = await User.findByPk(req.session.user_id, {
+      include: [{ model: Car }]
+    });
+    
+    const car = user.cars;
+  
+    Car.update({ location_id: req.params.id }, {
+       where: { id: car.id }
+      });
+    res.status(200).json({ message: "car upadeted successfully" });
+  } catch(err) {
+    res.status(400).json(err);
+  }
+});
+
 // Work around to show navigation page
 router.get("/menu", (req, res) => {
   res.render("menu", { logged_in: req.session.logged_in });
@@ -125,12 +142,11 @@ router.get("/addCar", (req, res) => {
 
 router.post("/addCar", async (req, res) => {
   try {
+    console.log("1")
     req.body.user_id = req.session.user_id;
-    console.log(req.session.user_id);
-
-    const userData = await Car.create(req.body);
-
-    req.status(200).json(userData);
+    console.log(req.body);
+    const car = await Car.create(req.body);
+    res.status(200).json(car);
   } catch (err) {
     res.status(400).json(err);
   }
