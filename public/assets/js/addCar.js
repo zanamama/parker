@@ -10,7 +10,7 @@ document.querySelector(".car-form").addEventListener("submit", async (event) => 
 	if ( brand && model && color ) {
 		const response = await fetch("/addCar", {
 			method: "POST",
-			body: body,
+			body: JSON.stringify(body),
 			headers: { "Content-Type": "application/json" },
 		});
 		if (response.ok) {
@@ -24,7 +24,7 @@ document.querySelector(".car-form").addEventListener("submit", async (event) => 
 			}, 3000);
 		}
 	} else {
-		message.innerText = "Invalid Inputs! Try again";
+		message.innerText = "Please fill out all input fields";
 		message.style.color = "red";
 		setTimeout(function(){
 			message.style.color = "black";

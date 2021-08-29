@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
   });
 });
 
+
 // Show parked cars in a specific locations using the location id
 router.get("/parking/:id", async (req, res) => {
   let showParkedCars = false;
@@ -25,6 +26,51 @@ router.get("/parking/:id", async (req, res) => {
   const locationData = location.get({ plain: true });
   if (locationData) showParkedCars = true;
   res.render("parking", { showParkedCars, locationData });
+});
+
+router.put("/parking/:id", async (req,res) => {
+  try{
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Car }]
+    });
+    
+    const car = userData.car;
+
+    if (car.location_id == req.params.id) {
+      res.status(500).json({ message: "already parked"})
+      return;
+    }
+    const carData = await Car.update({ location_id: req.params.id }, {
+       where: { id: car.id }
+      });
+    res.status(200).json({ message: "Car successfully parked!" });
+  } catch(err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put("/uparking/:id", async (req,res) => {
+  try{
+    const userData = await User.findByPk(req.session.user_id, {
+      include: { model: Car }
+    });
+    console.log(userData)
+    
+    const car = userData.car;
+    console.log(car.id);
+    console.log(req.body.car_id);
+
+    if (car.id != req.body.car_id) {
+      res.status(400).json({ message: "you cannot remove other users cars!"})
+      return;
+    } 
+    const carData = await Car.update({ location_id: null }, {
+      where: { id: req.body.car_id }
+     });
+    res.status(200).json({ message: "Car successfully removed!" });
+  } catch(err) {
+    res.status(400).json(err);
+  }
 });
 
 // Work around to show navigation page
@@ -39,15 +85,6 @@ res.render to call our handlebars pages */
 router.get("/login", (req, res) => {
   res.render("login");
 });
-
-// router.post("/login", (req, res) => {
-// 	try {
-// 		console.log(req.session.logged_in);
-// 		res.status(200).json({ message: "hello" })
-// 	} catch(err) {
-
-// 	}
-// });
 
 router.post("/login", async (req, res) => {
   try {
@@ -134,12 +171,11 @@ router.get("/addCar", (req, res) => {
 
 router.post("/addCar", async (req, res) => {
   try {
+    console.log("1")
     req.body.user_id = req.session.user_id;
-    console.log(req.session.user_id);
-
-    const userData = await Car.create(req.body);
-
-    req.status(200).json(userData);
+    console.log(req.body);
+    const car = await Car.create(req.body);
+    res.status(200).json(car);
   } catch (err) {
     res.status(400).json(err);
   }

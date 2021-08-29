@@ -1,7 +1,8 @@
 document
-  .querySelector("#login-form")
+  .querySelector(".login-form")
   .addEventListener("submit", async (event) => {
-    event.preventDefault;
+    event.preventDefault();
+    console.log("1")
 
     const email = document.getElementById("email").value.trim();
 
@@ -19,12 +20,12 @@ document
       if (response.ok) {
         document.location.replace("/");
       } else {
-        message.innerText = "Incorrect Email or Password";
+        message.innerText = "Please fill out all input fields";
         message.style.color = "red";
         setTimeout(() => {
           message.innerText = "Must be 8+ Characters in Length";
           message.style.color = "black";
-        }, 2000);
+        }, 3000);
       }
     }
   });
