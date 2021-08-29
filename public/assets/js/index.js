@@ -7,6 +7,7 @@ const locationApiUrl = `http://localhost:4000/api/locations`;
 
 // FUNCTIONS =====================
 function geoFindMe() {
+	console.log("1")
 	mapLink.href = "";
 	mapLink.textContent = "";
 
@@ -56,6 +57,7 @@ function locationApiCall(locationObj) {
 			}
 		});
 }
+
 
 // INTERACTIONS =====================
 document.querySelector("#find-me").addEventListener("click", geoFindMe);
