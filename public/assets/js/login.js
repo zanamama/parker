@@ -25,7 +25,7 @@ document
         setTimeout(() => {
           message.innerText = "Must be 8+ Characters in Length";
           message.style.color = "black";
-        }, 2000);
+        }, 3000);
       }
     }
   });

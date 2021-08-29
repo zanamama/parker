@@ -29,20 +29,45 @@ router.get("/parking/:id", async (req, res) => {
 });
 
 router.put("/parking/:id", async (req,res) => {
-  console.log(req.body)
   try{
-    console.log("1")
     const userData = await User.findByPk(req.session.user_id, {
       include: [{ model: Car }]
     });
-    console.log("2")
     
-    const car_id = userData.car.id;
+    const car = userData.car;
+
+    if (car.location_id == req.params.id) {
+      res.status(500).json({ message: "already parked"})
+      return;
+    }
     const carData = await Car.update({ location_id: req.params.id }, {
-       where: { id: car_id }
+       where: { id: car.id }
       });
-    console.log("4")
     res.status(200).json({ message: "Car successfully parked!" });
+  } catch(err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put("/uparking/:id", async (req,res) => {
+  try{
+    const userData = await User.findByPk(req.session.user_id, {
+      include: { model: Car }
+    });
+    console.log(userData)
+    
+    const car = userData.car;
+    console.log(car.id);
+    console.log(req.body.car_id);
+
+    if (car.id != req.body.car_id) {
+      res.status(400).json({ message: "you cannot remove other users cars!"})
+      return;
+    } 
+    const carData = await Car.update({ location_id: null }, {
+      where: { id: req.body.car_id }
+     });
+    res.status(200).json({ message: "Car successfully removed!" });
   } catch(err) {
     res.status(400).json(err);
   }

@@ -1,9 +1,9 @@
 {{#if showParkedCars}}
 	<div class="row">
-		<div class="col-12 text-center" data-loc="{{locationData.id}}" id="location"><h3>{{locationData.address}}</h3></div>
+		<div class="col-12 text-center" data-loc="{{locationData.id}}" id="location"><h4>{{locationData.address}}</h4></div>
 	</div>
 
-	<div class="row my-5">
+	<div class="row my-2">
 		<div class="offset-2 col-8">
 			<a
 				href="https://www.google.com/maps/search/?api=1&query={{locationData.latitude}},{{locationData.longitude}}"
@@ -12,20 +12,26 @@
 			>Go Now!</a>
 
 			<button type="button" id="park-here" class="btn btn-secondary form-control btn-lg my-1">
-				I Parked Here
+				Park Here
 			</button>
 		</div>
 	</div>
 
 	<div class="row">
+		<div class="col-10">
+			<p id="park-message"></p>
+		</div>
+	</div>
+	
+	<div class="row">
 		<div class="col-12">
 			{{#if locationData.cars}}
-				<ul class="list-group">
+				<ul class="list-group" id="car-list">
 					{{#each locationData.cars as |car|}}
 						<li class="list-group-item"><i
-								class="fas fa-car-side text-danger fa-lg mr-2"
+								class="fas fa-car-side text-danger fa-lg mr-2" data-id='{{car.id}}' id="del-btn"
 							></i>
-							<span class="text-muted mr-2">{{@index}}
+							<span class="text-muted mr-2">{{incremented @index}}
 								of 5</span>
 							<span class="h4">{{car.brand}} {{car.model}}</span>
 						</li>
