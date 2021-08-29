@@ -18,6 +18,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
 	// TODO: add create car function here
 
+
 	res.status(200).json({
 		method: req.method,
 		endpoint: `/api/cars`,
@@ -28,12 +29,22 @@ router.post("/", (req, res) => {
 // PUT /api/cars/:id
 router.put("/:id", (req, res) => {
 	// TODO: add update car function here
+	Car.update(
+		{ location_id: req.params.id },
+		{
+			where: {
+				id: req.session.user.car_id,
+			},
+		}
+	);
 
 	res.status(200).json({
 		method: req.method,
 		endpoint: `/api/cars/${req.params.id}`,
 		...req.body,
 	});
+
+	res.render("parking");
 });
 
 // DELETE /api/cars/:id
