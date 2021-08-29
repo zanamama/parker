@@ -44,13 +44,12 @@ body {
     min-height: 5vh;
   }
 }
-
+/* 
 textarea {
   overflow: scroll;
   width: 100%;
   text-align: left;
-  height: 100%;
-}
+} */
 
 ol li {
   list-style-type: none;
