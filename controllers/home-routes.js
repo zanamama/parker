@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
   });
 });
 
+
 // Show parked cars in a specific locations using the location id
 router.get("/parking/:id", async (req, res) => {
   let showParkedCars = false;
@@ -27,18 +28,21 @@ router.get("/parking/:id", async (req, res) => {
   res.render("parking", { showParkedCars, locationData });
 });
 
-router.put("parking/:id", async (req,res) => {
+router.put("/parking/:id", async (req,res) => {
+  console.log(req.body)
   try{
-    const user = await User.findByPk(req.session.user_id, {
+    console.log("1")
+    const userData = await User.findByPk(req.session.user_id, {
       include: [{ model: Car }]
     });
+    console.log("2")
     
-    const car = user.cars;
-  
-    Car.update({ location_id: req.params.id }, {
-       where: { id: car.id }
+    const car_id = userData.car.id;
+    const carData = await Car.update({ location_id: req.params.id }, {
+       where: { id: car_id }
       });
-    res.status(200).json({ message: "car upadeted successfully" });
+    console.log("4")
+    res.status(200).json({ message: "Car successfully parked!" });
   } catch(err) {
     res.status(400).json(err);
   }
