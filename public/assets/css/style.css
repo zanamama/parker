@@ -9,14 +9,12 @@ body {
 	display: flex;
 	justify-content: center;
 	align-content: center;
-	overflow: hidden !important;
 }
 
 .mock-phone {
 	min-height: 70vh;
 	background-color: #ffffff;
 	border-radius: 10px;
-	overflow: hidden !important;
 }
 
 .mock-phone-header {
@@ -31,16 +29,20 @@ body {
 	background-color: #000000;
 }
 
+.clickable {
+	cursor: pointer;
+}
+
 @media screen and (max-width: 577px) {
 	.mock-phone-header {
-		min-height: 5vh;
+		min-height: 0;
 	}
 
 	.mock-phone {
-		min-height: 90vh;
+		min-height: 100vh;
 	}
 
 	.mock-phone-footer {
-		min-height: 5vh;
+		min-height: 0;
 	}
 }
