@@ -149,8 +149,15 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.get("/profile", (req, res) => {
-  res.render("profile");
+router.get("/profile", async (req, res) => {
+  const userData = await User.findByPk(req.session.user_id, {
+    include: { model: Car }
+  });
+
+  const user = userData.dataValues;
+  const car = user.car.dataValues;
+
+  res.render("profile", {user, car} );
 });
 
 router.get("/how", (req, res) => {
