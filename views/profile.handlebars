@@ -1,4 +1,41 @@
-    <div class="row my-5">
+<div class="row">
+    <div class="col-4 offset-4 text-center">
+        <i class="fas fa-user-circle fa-6x"></i>
+    </div>
+</div>
+<div class="row">
+    <div class="col text-center mt-3">
+        <h2>{{user.firstname}} {{user.lastname}}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-5">
+        <h5>{{user.firstname}}'s car:    {{car.color}} {{car.brand}} {{car.model}}</h5>
+    </div>
+</div>
+<div class="secondRow my-5">
+    <div class="row my-3">
+        <div class="col-4 offset-1 text-center">
+            <a href="/profile" class="btn btn-outline-primary">Change current car</a>
+        </div>
+        <div class="col-4 offset-2 text-center">
+            <a href="/profile" class="btn btn-outline-success">Change User Login Info</a>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row my-3">
+        <div class="col-4 offset-1 text-center">
+            <a href="/how"class="btn btn-outline-primary">How it works</a>
+        </div>
+        <div class="col-4 offset-2 text-center">
+            <a href="/privacy" class="btn btn-outline-danger">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+
+
+    {{!-- <div class="row my-5">
         <div class="col-4"></div>
         <div class="col-4 text-center">
             <i class="fas fa-user-circle fa-6x"></i>
@@ -12,7 +49,7 @@
         </div>
         <div class="col-4"></div>
     </div>
-     {{!-- TODO: display users car on their profile --}}
+      TODO: display users car on their profile
 <div class="secondRow my-5">
     <div class="row my-3">
         <div class="col-4"></div>
@@ -35,4 +72,4 @@
         </div>
         <div class="col-4"></div>
     </div>
-</div>
+</div> --}}
