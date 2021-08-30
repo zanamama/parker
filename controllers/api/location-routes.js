@@ -65,21 +65,12 @@ router.post("/", (req, res) => {
 // PUT /api/locations/:id
 router.put("/:id", (req, res) => {
 	// TODO: add update location function here
-	Car.update(
-		{ location_id: req.params.id },
-		{
-			where: {
-				id: req.session.user.car_id,
-			},
-		}
-	);
 
 	res.status(200).json({
 		method: req.method,
 		endpoint: `/api/locations/${req.params.id}`,
 		...req.body,
 	});
-	res.render("parking");
 });
 
 // DELETE /api/locations/:id
