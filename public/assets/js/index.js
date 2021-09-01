@@ -3,11 +3,11 @@ const status = document.querySelector("#status");
 const mapLink = document.querySelector("#map-link");
 // // TODO: Make sure the locationApiUrl is dynamic to work on live deployment
 // const locationApiUrl = `https://parker-live.herokuapp.com/api/locations`;
-const locationApiUrl = `http://localhost:4000/api/locations`;
+const locationApiUrl = `/api/locations`;
 
 // FUNCTIONS =====================
 function geoFindMe() {
-	console.log("1")
+	console.log("1");
 	mapLink.href = "";
 	mapLink.textContent = "";
 
@@ -57,7 +57,6 @@ function locationApiCall(locationObj) {
 			}
 		});
 }
-
 
 // INTERACTIONS =====================
 document.querySelector("#find-me").addEventListener("click", geoFindMe);
